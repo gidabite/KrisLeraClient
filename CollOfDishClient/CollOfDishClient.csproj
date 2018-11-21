@@ -185,6 +185,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CollOfDishClient20181121035014 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CollOfDishClient20181121062929 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\WebApplication120181121035014 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Order.aspx" />
     <Content Include="Payment.aspx" />

@@ -112,7 +112,9 @@ namespace CollOfDishClient
             string[] words = parse.Split('/');
             string cartId = words[0];
             string cost = words[1];
-            Uri baseurl = new Uri("http://localhost/CollOfDishClient/");
+            string[] splitAddress = Request.Url.AbsoluteUri.Split(new char[] { '/' });
+            string address = splitAddress[0] + "//" + splitAddress[2] + "/";
+            Uri baseurl = new Uri(address);
             Uri newurl = new Uri(baseurl, "(S(" + sessionId + 
                 "))/Order?cartId="+cartId+"&cost="+cost);
             Response.Redirect(newurl.ToString());

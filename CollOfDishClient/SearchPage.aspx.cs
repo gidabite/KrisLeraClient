@@ -57,6 +57,7 @@ namespace CollOfDishClient
             string addressIP = splitAddress[0] + "//" + splitAddress[2] + "/";
             Uri baseurl = new Uri(addressIP);
             string servings = TxtBox_servings.Text;
+            dishName = TxtBox_search.Text;
             Uri newurl = new Uri(baseurl, "(S(" + sessionId + "))/Carts?dish="+dishName+"&servings="+servings);
             Response.Redirect(newurl.ToString());
         }
