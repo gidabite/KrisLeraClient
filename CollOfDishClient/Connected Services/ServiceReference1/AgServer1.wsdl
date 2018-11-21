@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:Agregator" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="urn:Agregator" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AgregatorServer provide connect to outside API services</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:Agregator">
+      <s:element name="SearchDish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userSessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dishName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchDishResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchDishResult" type="tns:DishObject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DishObject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DishName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DishDescr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImageURL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetListOfUsersReq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetListOfUsersReqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListOfUsersReqResult" type="tns:ArrayOfUserRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserRequest" nillable="true" type="tns:UserRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DishName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateRequest" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UserRegistration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userSessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userSecondName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userLogin" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserRegistrationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserRegistrationResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserEnter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userSessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userLogin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserEnterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserEnterResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userSessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserSessionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserFirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserSecondName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserLogin" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="СartsSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userSessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dishName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="numberOfCarts" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="СartsSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="СartsSearchResult" type="tns:ArrayOfCart" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCart">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cart" nillable="true" type="tns:Cart" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cart">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CartId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductList" type="tns:ArrayOfProduct" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPrice" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProduct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Product" nillable="true" type="tns:Product" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Product">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userSessionId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cartId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="deliveryAddress" type="tns:Address" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderCoast" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="cresitCard" type="tns:CreditCard" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="House" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Apartment" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CreditCard">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CardholdersName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidityMM" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidityYY" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CVC" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateOrderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SearchDishSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchDish" />
+  </wsdl:message>
+  <wsdl:message name="SearchDishSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchDishResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListOfUsersReqSoapIn">
+    <wsdl:part name="parameters" element="tns:GetListOfUsersReq" />
+  </wsdl:message>
+  <wsdl:message name="GetListOfUsersReqSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListOfUsersReqResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserRegistrationSoapIn">
+    <wsdl:part name="parameters" element="tns:UserRegistration" />
+  </wsdl:message>
+  <wsdl:message name="UserRegistrationSoapOut">
+    <wsdl:part name="parameters" element="tns:UserRegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserEnterSoapIn">
+    <wsdl:part name="parameters" element="tns:UserEnter" />
+  </wsdl:message>
+  <wsdl:message name="UserEnterSoapOut">
+    <wsdl:part name="parameters" element="tns:UserEnterResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="СartsSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:СartsSearch" />
+  </wsdl:message>
+  <wsdl:message name="СartsSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:СartsSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateOrder" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AgregatorServerSoap">
+    <wsdl:operation name="SearchDish">
+      <wsdl:input message="tns:SearchDishSoapIn" />
+      <wsdl:output message="tns:SearchDishSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfUsersReq">
+      <wsdl:input message="tns:GetListOfUsersReqSoapIn" />
+      <wsdl:output message="tns:GetListOfUsersReqSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserRegistration">
+      <wsdl:input message="tns:UserRegistrationSoapIn" />
+      <wsdl:output message="tns:UserRegistrationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserEnter">
+      <wsdl:input message="tns:UserEnterSoapIn" />
+      <wsdl:output message="tns:UserEnterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input message="tns:GetUserInfoSoapIn" />
+      <wsdl:output message="tns:GetUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="СartsSearch">
+      <wsdl:input message="tns:СartsSearchSoapIn" />
+      <wsdl:output message="tns:СartsSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <wsdl:input message="tns:CreateOrderSoapIn" />
+      <wsdl:output message="tns:CreateOrderSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AgregatorServerSoap" type="tns:AgregatorServerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchDish">
+      <soap:operation soapAction="urn:Agregator/SearchDish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfUsersReq">
+      <soap:operation soapAction="urn:Agregator/GetListOfUsersReq" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRegistration">
+      <soap:operation soapAction="urn:Agregator/UserRegistration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserEnter">
+      <soap:operation soapAction="urn:Agregator/UserEnter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="urn:Agregator/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СartsSearch">
+      <soap:operation soapAction="urn:Agregator/СartsSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap:operation soapAction="urn:Agregator/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AgregatorServerSoap12" type="tns:AgregatorServerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchDish">
+      <soap12:operation soapAction="urn:Agregator/SearchDish" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListOfUsersReq">
+      <soap12:operation soapAction="urn:Agregator/GetListOfUsersReq" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRegistration">
+      <soap12:operation soapAction="urn:Agregator/UserRegistration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserEnter">
+      <soap12:operation soapAction="urn:Agregator/UserEnter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap12:operation soapAction="urn:Agregator/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СartsSearch">
+      <soap12:operation soapAction="urn:Agregator/СartsSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap12:operation soapAction="urn:Agregator/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AgregatorServer">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AgregatorServer provide connect to outside API services</wsdl:documentation>
+    <wsdl:port name="AgregatorServerSoap" binding="tns:AgregatorServerSoap">
+      <soap:address location="http://agregatorserver.azurewebsites.net/AgServer.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AgregatorServerSoap12" binding="tns:AgregatorServerSoap12">
+      <soap12:address location="http://agregatorserver.azurewebsites.net/AgServer.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
